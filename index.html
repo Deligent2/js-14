@@ -9,20 +9,14 @@
 </head>
 
 <body>
+    <div id="todo-container">
+        <h2>Todo List</h2>
 
-    <div class="container">
-        <h1>
-            Todo list
-        </h1>
-        <div class="input">
-            <input type="text" id="input" placeholder="Entr your task">
-            <button onclick="addTusk()">add</button>
-        </div>
-        <div class="list">
-            <ul id="list">
+        <input type="text" id="todo-input" placeholder="Enter task">
+        <button onclick="addTodo()">Add</button>
+        <p class="error-message" id="error-message"></p>
 
-            </ul>
-        </div>
+        <ul id="todo-list"></ul>
     </div>
 
 

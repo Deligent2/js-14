@@ -1,46 +1,62 @@
-const list = document.querySelector('#list')
-const taskInput = document.querySelector('#input')
+const todoListElement = document.querySelector('#todo-list');
+const inputElement = document.querySelector('#todo-input');
+const errorMessageElement = document.querySelector('#error-message');
 
+let todoList = [];
 
+function addTodo() {
+    const taskName = inputElement.value.trim();
 
+    if (taskName === '') {
+        errorMessageElement.textContent = 'Please enter a task.';
+        return;
+    }
 
-function addTusk() {
-   
-    if (taskInput.value !== '') {
-        let li = document.createElement('li');
-        li.textContent = taskInput.value;
+    if (todoList.length >= 10) {
+        errorMessageElement.textContent = 'Maximum number of items reached.';
+        return;
+    }
 
-        let deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.addEventListener('click', function () {
-            list.removeChild(li);
-        });
+    errorMessageElement.textContent = '';
 
-        
-        list.appendChild(li);
+    const newTodo = {
+        name: taskName,
+        completed: false
+    };
 
-        taskInput.value = '';
+    todoList.push(newTodo);
+    updateTodoList();
+
+    inputElement.value = '';
+}
+
+function updateTodoList() {
+    todoListElement.innerHTML = '';
+
+    for (const todo of todoList) {
+        const listItem = document.createElement('li');
+        listItem.className = 'todo-item';
+        listItem.innerHTML = `
+            <span>${todo.name}</span>
+            <input type="checkbox" ${todo.completed ? 'checked' : ''} >
+        `;
+        todoListElement.appendChild(listItem);
     }
 }
 
 
-const todos = [
-    {
-        id: 1,
-        text: 'Take out Trash',
-        completed: true
-    },
-    {
-        id: 2,
-        text: 'Meeting with boss',
-        completed: false
-    }
-]
 
-list.innerHTML = `
-${todos.map(todo => {
-    return `<li>
-    <input type="checkbox" ${todo.completed ? 'checked' : ''}/>
-    <span> ${todo.text}</span>
-    `
-})}`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
